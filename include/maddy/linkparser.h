@@ -10,6 +10,7 @@
 #include <regex>
 
 #include "maddy/lineparser.h"
+#include "maddy/callbackreplacer.h"
 
 // -----------------------------------------------------------------------------
 
@@ -26,6 +27,16 @@ namespace maddy {
  */
 class LinkParser : public LineParser
 {
+private:
+  std::function<std::string(std::smatch &)> callback = [](std::smatch & match){
+    std::string inner = match.str(1);
+    std::string link = match.str(2);
+    return "<a href=\"" + link + "\">" + inner + "</a>";
+  };
+
+  std::regex re = std::regex("\\[([^\\]]*)\\]\\(([^\\]]*)\\)");
+
+
 public:
   /**
    * Parse
@@ -41,10 +52,12 @@ public:
   void
   Parse(std::string& line) override
   {
-    static std::regex re("\\[([^\\]]*)\\]\\(([^\\]]*)\\)");
-    static std::string replacement = "<a href=\"$2\">$1</a>";
+    line = regex_callback_replacer(re,line,callback);
+  }
 
-    line = std::regex_replace(line, re, replacement);
+  void setCallback(std::function<std::string(std::smatch &)> callback)
+  {
+    this->callback = callback;
   }
 }; // class LinkParser
 
