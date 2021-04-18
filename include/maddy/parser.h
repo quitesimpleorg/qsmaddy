@@ -116,6 +116,54 @@ public:
     return result;
   }
 
+  void
+  setBreakLineParser(std::shared_ptr<BreakLineParser> breakLineParser)
+  {
+    this->breakLineParser = breakLineParser;
+  }
+
+  void
+  setEmphasizedParser(std::shared_ptr<EmphasizedParser> emphasizedParser)
+  {
+    this->emphasizedParser = emphasizedParser;
+  }
+
+  void
+  setImageParser(std::shared_ptr<ImageParser> imageParser)
+  {
+    this->imageParser = imageParser;
+  }
+
+  void
+  setInlineCodeParser(std::shared_ptr<InlineCodeParser> inlineCodeParser)
+  {
+    this->inlineCodeParser = inlineCodeParser;
+  }
+
+  void
+  setItalicParser(std::shared_ptr<ItalicParser> italicParser)
+  {
+    this->italicParser = italicParser;
+  }
+
+  void
+  setLinkParser(std::shared_ptr<LinkParser> linkParser)
+  {
+    this->linkParser = linkParser;
+  }
+
+  void
+  setStrikeThroughParser(std::shared_ptr<StrikeThroughParser> strikeThroughParser)
+  {
+    this->strikeThroughParser = strikeThroughParser;
+  }
+
+  void
+  setStrongParser(std::shared_ptr<StrongParser> strongParser)
+  {
+    this->strongParser = strongParser;
+  }
+
 private:
   std::shared_ptr<ParserConfig> config;
   std::shared_ptr<BreakLineParser> breakLineParser;
